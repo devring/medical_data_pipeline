@@ -37,7 +37,7 @@ country_list = [i[0] for i in res]
 
 
 #Approach 1:
-#Writing the data to their respective Country Tables  (ONLY INSERT and DOES NOT HANDLE DUPLICATES)
+#Writing the data to their respective Country Tables  (ONLY INSERT and DOES NOT HANDLE INCREMENTAL INSERTS)
 #for country in country_list:
 #    if country in countries_lookup:
 #        query = "INSERT INTO {country_table} SELECT Customer_Name, Customer_Id, Open_Date, Last_Consulted_Date, Vaccination_Id, Dr_Name, State, Country, DOB, Is_Active  FROM {stage_table} WHERE Country = '{country_name}'".format(country_table = countries_lookup[country],stage_table = tbl_name, country_name = country )
@@ -47,7 +47,7 @@ country_list = [i[0] for i in res]
 
 #Approach 2:
 #Writing the data to their respective Country Tables  (WITH INSERT AND UPDATE QUERIES)
-#A more robust approach to handle duplicates and updates
+#A more robust approach to handle incremental inserts with duplicates and updates
 
 logging.info('Inserting Data to respective Country Table')
 try:
