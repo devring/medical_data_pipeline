@@ -1,7 +1,7 @@
 # Data Pipeline implementation for ingesting medical records to SQL Tables
 
 ## Objective
-The main objective of this project is ingest Pipe Delimited Files into MySql Tables.
+The main objective of this project is to ingest Pipe Delimited Files into MySql Tables.
 
 ## Data
 The Pipe Delimited Files contain data of Cutomer Records from a Hospital. 
