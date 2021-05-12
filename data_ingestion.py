@@ -61,6 +61,7 @@ try:
             update_query = sql_query.query_gen('update',country)
             result = connection.execute(insert_query)
 except:
+    #To be implemented based on the use case
     pass
 
 logging.info('Data Ingestion Complete')
