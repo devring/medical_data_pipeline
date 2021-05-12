@@ -1,0 +1,81 @@
+# Table Creation Queries
+create table customer_details_stage (Customer_Name VARCHAR(255) PRIMARY KEY NOT NULL, 
+                                     Customer_Id VARCHAR(18) NOT NULL, 
+                                     Open_Date DATE NOT NULL, 
+                                     Last_Consulted_Date DATE,
+                                     Vaccination_Id CHAR(5), 
+                                     Dr_Name CHAR(255), 
+                                     State CHAR(5), 
+                                     Country CHAR(5),
+                                     DOB DATE,
+                                     Is_Active CHAR(1));
+
+create table cus_details_india (Customer_Name VARCHAR(255) PRIMARY KEY NOT NULL, 
+                                     Customer_Id VARCHAR(18) NOT NULL, 
+                                     Open_Date DATE NOT NULL, 
+                                     Last_Consulted_Date DATE,
+                                     Vaccination_Id CHAR(5), 
+                                     Dr_Name CHAR(255), 
+                                     State CHAR(5), 
+                                     Country CHAR(5),
+                                     DOB DATE,
+                                     Is_Active CHAR(1));
+create table cus_details_usa (Customer_Name VARCHAR(255) PRIMARY KEY NOT NULL, 
+                                     Customer_Id VARCHAR(18) NOT NULL, 
+                                     Open_Date DATE NOT NULL, 
+                                     Last_Consulted_Date DATE,
+                                     Vaccination_Id CHAR(5), 
+                                     Dr_Name CHAR(255), 
+                                     State CHAR(5), 
+                                     Country CHAR(5),
+                                     DOB DATE,
+                                     Is_Active CHAR(1));
+create table cus_details_phil (Customer_Name VARCHAR(255) PRIMARY KEY NOT NULL, 
+                                     Customer_Id VARCHAR(18) NOT NULL, 
+                                     Open_Date DATE NOT NULL, 
+                                     Last_Consulted_Date DATE,
+                                     Vaccination_Id CHAR(5), 
+                                     Dr_Name CHAR(255), 
+                                     State CHAR(5), 
+                                     Country CHAR(5),
+                                     DOB DATE,
+                                     Is_Active CHAR(1));
+
+create table cus_details_nyc (Customer_Name VARCHAR(255) PRIMARY KEY NOT NULL, 
+                                     Customer_Id VARCHAR(18) NOT NULL, 
+                                     Open_Date DATE NOT NULL, 
+                                     Last_Consulted_Date DATE,
+                                     Vaccination_Id CHAR(5), 
+                                     Dr_Name CHAR(255), 
+                                     State CHAR(5), 
+                                     Country CHAR(5),
+                                     DOB DATE,
+                                     Is_Active CHAR(1));
+create table cus_details_au (Customer_Name VARCHAR(255) PRIMARY KEY NOT NULL, 
+                                     Customer_Id VARCHAR(18) NOT NULL, 
+                                     Open_Date DATE NOT NULL, 
+                                     Last_Consulted_Date DATE,
+                                     Vaccination_Id CHAR(5), 
+                                     Dr_Name CHAR(255), 
+                                     State CHAR(5), 
+                                     Country CHAR(5),
+                                     DOB DATE,
+                                     Is_Active CHAR(1));
+
+# Queries used in execution
+
+
+##Approach 1:
+#Insert Query
+INSERT INTO {country_table} SELECT Customer_Name, Customer_Id, Open_Date, Last_Consulted_Date, Vaccination_Id, Dr_Name, State, Country, DOB, Is_Active  FROM {stage_table} WHERE Country = '{country_name}'".format(country_table = countries_lookup[country],stage_table = tbl_name, country_name = '{country_name}'
+
+
+##Approach 2: (This is Implemented in the project. This handles Incremental Ingestion)
+#Insert Query
+INSERT INTO {country_table} SELECT t1.Customer_Name, t1.Customer_Id, t1.Open_Date, t1.Last_Consulted_Date, t1.Vaccination_Id, t1.Dr_Name,t1.State, t1.Country, t1.DOB, t1.Is_Active  FROM {stage_table} t1 LEFT JOIN {country_table} t2 on t1.Customer_Name = t2.Customer_Name WHERE t2.Customer_Name is NULL and t1.Country = '{country_name}'
+
+
+#Update Query
+INSERT INTO {country_table} SELECT t1.Customer_Name, t1.Customer_Id, t1.Open_Date, t1.Last_Consulted_Date, t1.Vaccination_Id, t1.Dr_Name, t1.State, t1.Country, t1.DOB, t1.Is_Active  FROM {stage_table} t1 INNER JOIN {country_table} t2 on t1.Customer_Name = t2.Customer_Name WHERE t1.Customer_Id != t2.Customer_Id or t1.Open_Date != t2.Open_Date or t1.Last_Consulted_Date != t2.Last_Consulted_Date or t1.Vaccination_Id != t2.Vaccination_Id or t1.Dr_Name != t2.Dr_Name or t1.State != t2.State or t1.Country != t2.Country or t1.DOB != t2.DOB or t1.Is_Active != t2.Is_Active and t1.Country = '{country_name}'
+
+
