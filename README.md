@@ -5,13 +5,13 @@ The main objective of this project is to ingest Pipe Delimited Files into MySql 
 
 ## Data
 The Pipe Delimited Files contain data of Cutomer Records from a Hospital. 
-The data needs to be ingested into Country specific SQL Tables based on the Cutomer Country.
+The data needs to be ingested into Country specific SQL Tables based on the Customer Country.
 
 ## Workflow
 
 1. The Pipe Delimited File is first loaded by the Python Script
 2. The data is then ingested into the Stage Table
-3. The data from the Stage Table is then inserted to Country Tables based on the Country mentioned in the Country Column in each record.
+3. The data from the Stage Table is then inserted to the Country Tables based on the Country mentioned in the Country Column in each record.
 ![image](https://user-images.githubusercontent.com/43230261/117928612-6da4c000-b319-11eb-9087-c98d50f2b044.png)
 
 
