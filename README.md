@@ -37,3 +37,22 @@ To handle incremental inserts (which may have duplicates and updates), two queri
 ### Steps to run the code
 1. Make sure all the required packages are installed.
 2. Run data_ingestion.py
+
+### Results Screenshots
+
+#### Stage Table
+![image](https://user-images.githubusercontent.com/43230261/117933335-16a1e980-b31f-11eb-94bf-8b30b9dededd.png)
+
+#### Country Tables
+
+##### Country Table - India
+![image](https://user-images.githubusercontent.com/43230261/117933720-7e583480-b31f-11eb-94d0-6595f39d5284.png)
+
+##### Country Table - USA
+![image](https://user-images.githubusercontent.com/43230261/117933786-9334c800-b31f-11eb-91a9-d2f4feb458f9.png)
+
+##### Country Table - Phil
+![image](https://user-images.githubusercontent.com/43230261/117933862-a6479800-b31f-11eb-996c-30a696175089.png)
+
+
+
