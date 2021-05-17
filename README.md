@@ -28,11 +28,9 @@ The data needs to be ingested into Country specific SQL Tables based on the Cust
 
 ### Data Ingestion Approach
 
-To handle incremental inserts (which may have duplicates and updates), two queries are written - one for Inserts and the other for Updates:
+To handle incremental inserts (which may have duplicates), the following query is written:
 
-1.The insert query first does a comparison between the Stage Table and Country Table and inserts only New Records.
-
-2.The update query first compares Stage Table and Country Table and inserts only those records which are found to be updated.
+The insert query first does a comparison between the Stage Table and Country Table and inserts only New Records into the Country Table.
 
 ### Steps to run the code
 1. Make sure all the required packages are installed.
