@@ -2,16 +2,18 @@ import pandas as pd
 import logging
 from db_config import Config
 from queries import Queries
-
+import sys
 
 config = Config()
 sql_query = Queries()
 
+
 logging.basicConfig(level=logging.DEBUG)
 logging.info('Reading the input data')
-df = pd.read_csv('medical_data.txt', delimiter='|')
+df = pd.read_csv('/Users/harsha/Documents/Data/incubyte_assignment/medical_data.txt', delimiter='|')
 df = df.drop(df.columns[:2], axis=1)
 df['DOB'] = pd.to_datetime(df['DOB'], format='%m%d%Y').dt.date
+
 
 logging.info('Performing Quality Checks on the input data')
 #Rejected data can be used in error reports if needed. 
@@ -36,18 +38,9 @@ res = result.fetchall()
 country_list = [i[0] for i in res]
 
 
-#Approach 1:
-#Writing the data to their respective Country Tables  (ONLY INSERT and DOES NOT HANDLE INCREMENTAL INSERTS)
-#for country in country_list:
-#    if country in countries_lookup:
-#        query = "INSERT INTO {country_table} SELECT Customer_Name, Customer_Id, Open_Date, Last_Consulted_Date, Vaccination_Id, Dr_Name, State, Country, DOB, Is_Active  FROM {stage_table} WHERE Country = '{country_name}'".format(country_table = countries_lookup[country],stage_table = tbl_name, country_name = country )
-#        result = connection.execute(query)
 
-
-
-#Approach 2:
-#Writing the data to their respective Country Tables  (WITH INSERT AND UPDATE QUERIES)
-#A more robust approach to handle incremental inserts with duplicates and updates
+#Writing the data to their respective Country Tables  (WITH INCREMENTAL INSERT)
+#A more robust approach to handle incremental inserts (which may have duplicates)
 
 logging.info('Inserting Data to respective Country Table')
 try:
@@ -56,12 +49,8 @@ try:
             #Inserting only New Records into Country Tables
             insert_query = sql_query.query_gen('insert',country)
             result = connection.execute(insert_query)
-
-            #Updating existing records in Country Table (if any)
-            update_query = sql_query.query_gen('update',country)
-            result = connection.execute(insert_query)
 except:
     #To be implemented based on the use case
-    pass
+    print(sys.exc_info()[0], "occurred.")
 
 logging.info('Data Ingestion Complete')
